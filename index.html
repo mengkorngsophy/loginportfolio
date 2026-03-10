@@ -3,74 +3,236 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sophy Mengkorng Portfolio</title>
+
+    <title>Sophy Portfolio Login</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
 
     <style>
-      body {
-        font-family: Arial;
+      * {
         margin: 0;
-        background: #f5f6fa;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
       }
 
-      header {
-        background: linear-gradient(135deg, #8e2de2, #4a00e0);
-        color: white;
-        text-align: center;
+      body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      /* Background using your image */
+
+      .background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+
+        background:
+          linear-gradient(120deg, rgba(204, 0, 255, 0.7), rgba(15, 32, 39, 0.7)),
+          url("torii.png");
+
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+
+        animation: zoom 20s infinite alternate;
+
+        z-index: -2;
+      }
+
+      @keyframes zoom {
+        0% {
+          transform: scale(1);
+        }
+        100% {
+          transform: scale(1.2);
+        }
+      }
+
+      /* Particles layer */
+
+      #particles-js {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+
+      /* Login Box */
+
+      .login-box {
+        width: 360px;
         padding: 40px;
-      }
 
-      nav {
-        background: #1e1e2f;
-        text-align: center;
-        padding: 15px;
-      }
+        background: rgba(195, 0, 255, 0.1);
 
-      nav a {
+        border-radius: 20px;
+
+        backdrop-filter: blur(15px);
+
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+
         color: white;
-        text-decoration: none;
-        margin: 15px;
-        font-weight: bold;
-      }
 
-      nav a:hover {
-        color: #8e2de2;
-      }
-
-      .container {
-        width: 90%;
-        max-width: 900px;
-        margin: auto;
-        background: white;
-        margin-top: 30px;
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         text-align: center;
+
+        animation: fadeIn 1.5s ease;
+      }
+
+      /* Fade animation */
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .login-box h2 {
+        margin-bottom: 25px;
+        font-weight: 600;
+      }
+
+      /* Inputs */
+
+      .input-box {
+        margin-bottom: 18px;
+        text-align: left;
+      }
+
+      .input-box label {
+        font-size: 14px;
+      }
+
+      .input-box input {
+        width: 100%;
+        padding: 12px;
+        margin-top: 5px;
+
+        border: none;
+
+        border-radius: 10px;
+
+        outline: none;
+
+        background: rgba(255, 255, 255, 0.85);
+      }
+
+      /* Button */
+
+      button {
+        width: 100%;
+        padding: 12px;
+
+        border: none;
+
+        border-radius: 30px;
+
+        background: linear-gradient(45deg, #00f7ff, #8a2be2);
+
+        color: white;
+
+        font-weight: bold;
+
+        cursor: pointer;
+
+        transition: 0.4s;
+      }
+
+      button:hover {
+        transform: scale(1.08);
+        box-shadow: 0 0 20px #00f7ff;
+      }
+
+      /* Error */
+
+      #error {
+        margin-top: 10px;
+        color: #ffb3b3;
+        display: none;
       }
     </style>
   </head>
 
   <body>
-    <header>
-      <h1>Sophy Meng Korng</h1>
-      <p>Management Information System (MIS)</p>
-      <p>Student at Setec Institute</p>
-    </header>
+    <div class="background"></div>
 
-    <nav>
-      <a href="profile.html">Profile</a>
-      <a href="education.html">Education</a>
-      <a href="skills.html">Skills</a>
-      <a href="experience.html">Experience</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+    <div id="particles-js"></div>
 
-    <div class="container">
-      <h2>Welcome to My Portfolio</h2>
+    <div class="login-box">
+      <h2>Welcome to My Portfolio 👋</h2>
 
-      <img src="images.png" width="150" style="border-radius: 50%" />
+      <div class="input-box">
+        <label>Email</label>
+        <input type="email" id="email" />
+      </div>
 
-      <p>This is my personal portfolio website.</p>
+      <div class="input-box">
+        <label>Password</label>
+        <input type="password" id="password" />
+      </div>
+
+      <button onclick="login()">Login</button>
+
+      <p id="error">Invalid Email or Password</p>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+    <script>
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 90 },
+          color: { value: "#00f7ff" },
+          shape: { type: "circle" },
+          opacity: { value: 0.5 },
+          size: { value: 3 },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#00f7ff",
+            opacity: 0.4,
+            width: 1,
+          },
+          move: {
+            enable: true,
+            speed: 3,
+          },
+        },
+
+        interactivity: {
+          events: {
+            onhover: {
+              enable: true,
+              mode: "repulse",
+            },
+          },
+        },
+
+        retina_detect: true,
+      });
+
+      function login() {
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+
+        if (email === "sophymengkorng@gmail.com" && password === "123456") {
+          window.location.href = "index.html";
+        } else {
+          document.getElementById("error").style.display = "block";
+        }
+      }
+    </script>
   </body>
 </html>
